@@ -26,7 +26,17 @@ class Protos(object):
         info = r.json()
         return info['Domain']
 
+    # Consumer methods
     def create_resource(self, resource):
-        req = Request('POST', 'internal/resources', json=resource)
-        r = self._make_request(req)
+        req = Request('POST', 'internal/resource', json=resource)
+        r = self._send_request(req)
         return r.json()
+
+    def get_resource(self, resourceID):
+        req = Request('GET', 'internal/resource/' + resourceID)
+        r = self._send_request(req)
+        return r.json()
+
+    def delete_resource(self, resourceID):
+        req = Request('DELETE', 'internal/resource/' + resourceID)
+        r = self._send_request(req)
