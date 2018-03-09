@@ -1,0 +1,3 @@
+
+class ProtosException(Exception):
+    pass
