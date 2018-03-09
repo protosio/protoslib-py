@@ -39,4 +39,13 @@ class Protos(object):
 
     def delete_resource(self, resourceID):
         req = Request('DELETE', 'internal/resource/' + resourceID)
-        r = self._send_request(req)
+        self._send_request(req)
+
+    # Provider methods
+    def register_provider(self, rtype):
+        req = Request('POST', 'internal/provider/' + rtype)
+        self._send_request(req)
+
+    def deregister_provider(self, rtype):
+        req = Request('DELETE', 'internal/provider/' + rtype)
+        self._send_request(req)
