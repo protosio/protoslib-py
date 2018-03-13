@@ -2,7 +2,8 @@
 
 from setuptools import setup
 
-setup_info(name='protoslib',
+setup_info = dict(
+      name='protoslib',
       version='0.1',
       description='Python library for interacting with the internal Protos API',
       author='Alex Giurgiu',
