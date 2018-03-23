@@ -16,6 +16,10 @@ class Protos(object):
         pre = req.prepare()
         s = Session()
         resp = s.send(pre)
+        if resp.status_code == 401:
+            raise exceptions.Unauthorized(resp.text.rstrip())
+        if resp.status_code == 403:
+            raise exceptions.Forbidden(resp.text.rstrip())
         if resp.status_code != 200:
             raise exceptions.ProtosException(resp.text.rstrip())
         return resp
@@ -49,3 +53,12 @@ class Protos(object):
     def deregister_provider(self, rtype):
         req = Request('DELETE', 'internal/provider/' + rtype)
         self._send_request(req)
+
+    def authenticate_user(self, username, password):
+        userdata = {'username': username, 'password': password}
+        req = Request('POST', 'internal/user/auth', json=userdata)
+        try:
+            self._send_request(req)
+        except exceptions.Unauthorized:
+            return False
+        return True
