@@ -30,6 +30,12 @@ class Protos(object):
         info = r.json()
         return info['Domain']
 
+    def get_app_info(self):
+        req = Request('GET', 'internal/info/app')
+        r = self._send_request(req)
+        info = r.json()
+        return info
+
     # Consumer methods
     def create_resource(self, resource):
         req = Request('POST', 'internal/resource', json=resource)
