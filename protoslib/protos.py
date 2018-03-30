@@ -28,7 +28,7 @@ class Protos(object):
         req = Request('GET', 'internal/info/domain')
         r = self._send_request(req)
         info = r.json()
-        return info['Domain']
+        return info['domain']
 
     def get_app_info(self):
         req = Request('GET', 'internal/info/app')
