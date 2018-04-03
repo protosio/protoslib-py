@@ -63,9 +63,8 @@ class Protos(object):
     def authenticate_user(self, username, password):
         userdata = {'username': username, 'password': password}
         req = Request('POST', 'internal/user/auth', json=userdata)
-        user = None
         try:
-            user = self._send_request(req)
+            r = self._send_request(req)
         except exceptions.Unauthorized:
-            return user
-        return user
+            return None
+        return r.json()
