@@ -6,9 +6,9 @@ class Protos(object):
     Implements a Protos client for the internal API
     """
 
-    def __init__(self, appid, url='http://protos:8080/'):
+    def __init__(self, appid, url='http://protos:8080'):
         self.appid = appid
-        self.url = url
+        self.url = url + "/api/v1/"
 
     def _send_request(self, req):
         req.headers = {'Appid': self.appid}
