@@ -8,7 +8,7 @@ setup_info = dict(
       description='Python library for interacting with the internal Protos API',
       author='Alex Giurgiu',
       author_email='alex@giurgiu.io',
-      url='https://github.com/nustiueudinastea/protoslib-py',
+      url='https://github.com/protosio/protoslib-py',
       packages=['protoslib'],
      )
 

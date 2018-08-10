@@ -8,7 +8,7 @@ class Protos(object):
 
     def __init__(self, appid, url='http://protos:8080'):
         self.appid = appid
-        self.url = url + "/api/v1/"
+        self.url = url + "/api/v1/i/"
 
     def _send_request(self, req):
         req.headers = {'Appid': self.appid}
@@ -25,44 +25,44 @@ class Protos(object):
         return resp
 
     def get_domain(self):
-        req = Request('GET', 'internal/info/domain')
+        req = Request('GET', 'info/domain')
         r = self._send_request(req)
         info = r.json()
         return info['domain']
 
     def get_app_info(self):
-        req = Request('GET', 'internal/info/app')
+        req = Request('GET', 'info/app')
         r = self._send_request(req)
         info = r.json()
         return info
 
     # Consumer methods
     def create_resource(self, resource):
-        req = Request('POST', 'internal/resource', json=resource)
+        req = Request('POST', 'resource', json=resource)
         r = self._send_request(req)
         return r.json()
 
     def get_resource(self, resourceID):
-        req = Request('GET', 'internal/resource/' + resourceID)
+        req = Request('GET', 'resource/' + resourceID)
         r = self._send_request(req)
         return r.json()
 
     def delete_resource(self, resourceID):
-        req = Request('DELETE', 'internal/resource/' + resourceID)
+        req = Request('DELETE', 'resource/' + resourceID)
         self._send_request(req)
 
     # Provider methods
     def register_provider(self, rtype):
-        req = Request('POST', 'internal/provider/' + rtype)
+        req = Request('POST', 'provider/' + rtype)
         self._send_request(req)
 
     def deregister_provider(self, rtype):
-        req = Request('DELETE', 'internal/provider/' + rtype)
+        req = Request('DELETE', 'provider/' + rtype)
         self._send_request(req)
 
     def authenticate_user(self, username, password):
         userdata = {'username': username, 'password': password}
-        req = Request('POST', 'internal/user/auth', json=userdata)
+        req = Request('POST', 'user/auth', json=userdata)
         try:
             r = self._send_request(req)
         except exceptions.Unauthorized:
